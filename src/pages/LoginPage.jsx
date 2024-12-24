@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import myaxios from "../utils/myaxios";
 
 const LoginPage = () => {
@@ -44,9 +45,13 @@ const LoginPage = () => {
                                     <hr />
                                     <div className="float-end mt-3">
                                         <span>
-                                            <a className="text-center ms-3 h6" href="userRegistration.html">Sign Up </a>
+                                            <Link className="text-center ms-3 h6" to="/register/">
+                                                Sign Up
+                                            </Link>
                                             <span className="ms-1">|</span>
-                                            <a className="text-center ms-3 h6" href="sendOtp.html">Forget Password</a>
+                                            <Link className="text-center ms-3 h6" to="/reset-password/">
+                                                Forget Password
+                                            </Link>
                                         </span>
                                     </div>
                                 </form>
@@ -56,7 +61,7 @@ const LoginPage = () => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default LoginPage
+export default LoginPage;
