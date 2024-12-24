@@ -1,7 +1,8 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import myaxios from "../utils/myaxios";
 
 const LoginPage = () => {
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -17,8 +18,9 @@ const LoginPage = () => {
         ).then((response) => {
             if (response.data.status === "success") {
                 localStorage.setItem("token", response.data.token);
+                navigate("/dashboard/index/");
             } else {
-                alert(response.data.message);
+                console.error(response.data.message);
             }
         }).catch((error) => {
             console.log(error);

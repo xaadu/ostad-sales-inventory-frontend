@@ -12,20 +12,20 @@ const SetPasswordPage = () => {
         const data = Object.fromEntries(formdata);
 
         console.log(data);
-        navigate("/dashboard/");
 
-        // myaxios.post(
-        //     "/reset-password",
-        //     data,
-        // ).then((response) => {
-        //     if (response.data.status === "success") {
-        //         navigate("/dashboard/");
-        //     } else {
-        //         console.error(response.data);
-        //     }
-        // }).catch((error) => {
-        //     console.error(error);
-        // });
+        myaxios.post(
+            "/reset-password",
+            data,
+        ).then((response) => {
+            if (response.data.status === "success") {
+                console.log(response);
+                navigate("/dashboard/index/");
+            } else {
+                console.error(response.data);
+            }
+        }).catch((error) => {
+            console.error(error);
+        });
     };
 
     return (

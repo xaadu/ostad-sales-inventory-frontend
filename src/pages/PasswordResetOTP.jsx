@@ -15,24 +15,20 @@ const PasswordResetOTP = () => {
 
         console.log(data);
 
-        localStorage.setItem("token", "mytoken1234");
-        navigate("/set-new-password/");
-
-
-        // myaxios.post(
-        //     "/verify-otp",
-        //     data,
-        // ).then((response) => {
-        //     if (response.data.status === "success") {
-        //         console.log(response.data);
-        //         localStorage.setItem("token", response.data.token);
-        //         navigate("/set-new-password/");
-        //     } else {
-        //         console.error(response.data);
-        //     }
-        // }).catch((error) => {
-        //     console.error(error);
-        // });
+        myaxios.post(
+            "/verify-otp",
+            data,
+        ).then((response) => {
+            if (response.data.status === "success") {
+                console.log(response.data);
+                localStorage.setItem("token", response.data.token);
+                navigate("/set-new-password/");
+            } else {
+                console.error(response.data);
+            }
+        }).catch((error) => {
+            console.error(error);
+        });
     };
 
 

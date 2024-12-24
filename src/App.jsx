@@ -6,8 +6,13 @@ import RegisterPage from "./pages/RegisterPage";
 import PasswordReset from "./pages/PasswordReset";
 import PasswordResetOTP from "./pages/PasswordResetOTP";
 import SetPasswordPage from "./pages/SetPasswordPage";
-import DashboardPage from "./pages/DashboardPage";
-import Bulldog from "./components/Guard";
+
+import DashboardLayout from "./layouts/DashboardLayout";
+import DashboardIndexPage from "./pages/dashboard/IndexPage";
+import ProfilePage from "./pages/dashboard/ProfilePage";
+import CustomerPage from "./pages/Dashboard/CustomerPage";
+import LogoutPage from "./pages/LogoutPage";
+
 
 function App() {
   return (
@@ -19,14 +24,13 @@ function App() {
         <Route path="/reset-password" element={<PasswordReset />} />
         <Route path="/reset-password-otp" element={<PasswordResetOTP />} />
         <Route path="/set-new-password" element={<SetPasswordPage />} />
+        <Route path="/logout" element={<LogoutPage />} />
 
-        <Route element={<Bulldog />}>
+        <Route path="/dashboard/" element={<DashboardLayout />}>
 
-          <Route path="/dashboard" element={<DashboardPage />} />
-          <Route path="/dashboard2" element={<DashboardPage />} />
-          <Route path="/dashboard3" element={<DashboardPage />} />
-          <Route path="/dashboard4" element={<DashboardPage />} />
-          <Route path="/dashboard5" element={<DashboardPage />} />
+          <Route path="index/" element={<DashboardIndexPage />} /> {/* /dashboard/index/ */}
+          <Route path="profile/" element={<ProfilePage />} /> {/* /dashboard/profile/ */}
+          <Route path="customer/" element={<CustomerPage />} /> {/* /dashboard/customer/ */}
 
         </Route>
 

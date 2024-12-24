@@ -13,23 +13,20 @@ const PasswordReset = () => {
 
         console.log(data);
 
-        localStorage.setItem("email", data.email);
-        navigate("/reset-password-otp/");
-
-        // myaxios.post(
-        //     "/send-otp",
-        //     data,
-        // ).then((response) => {
-        //     if (response.data.status === "success") {
-        //         console.log(response.data);
-        //         localStorage.setItem("email", data.email);
-        //         navigate("/reset-password-otp/");
-        //     } else {
-        //         console.error(response.data);
-        //     }
-        // }).catch((error) => {
-        //     console.error(error);
-        // });
+        myaxios.post(
+            url = "/send-otp",
+            data = data,
+        ).then((response) => {
+            if (response.data.status === "success") {
+                console.log(response.data);
+                localStorage.setItem("email", data.email);
+                navigate("/reset-password-otp/");
+            } else {
+                console.error(response.data);
+            }
+        }).catch((error) => {
+            console.error(error);
+        });
     };
 
     return (
