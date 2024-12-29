@@ -12,6 +12,7 @@ import DashboardIndexPage from "./pages/dashboard/IndexPage";
 import ProfilePage from "./pages/dashboard/ProfilePage";
 import CustomerPage from "./pages/Dashboard/CustomerPage";
 import LogoutPage from "./pages/LogoutPage";
+import Test from "./components/Test";
 
 
 function App() {
@@ -28,11 +29,14 @@ function App() {
 
         <Route path="/dashboard/" element={<DashboardLayout />}>
 
-          <Route path="index/" element={<DashboardIndexPage />} /> {/* /dashboard/index/ */}
-          <Route path="profile/" element={<ProfilePage />} /> {/* /dashboard/profile/ */}
-          <Route path="customer/" element={<CustomerPage />} /> {/* /dashboard/customer/ */}
+          <Route path="index/" element={<DashboardIndexPage />} />
+          <Route path="profile/" element={<ProfilePage />} />
+          <Route path="customer/" element={<CustomerPage />} />
+          <Route path="test/" element={<Test />} />
 
         </Route>
+
+        <Route path="*" element={<h1>404 Not Found!</h1>} />
 
       </Routes>
     </BrowserRouter>

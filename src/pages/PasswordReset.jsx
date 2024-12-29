@@ -14,8 +14,8 @@ const PasswordReset = () => {
         console.log(data);
 
         myaxios.post(
-            url = "/send-otp",
-            data = data,
+            "/send-otp",
+            data,
         ).then((response) => {
             if (response.data.status === "success") {
                 console.log(response.data);
