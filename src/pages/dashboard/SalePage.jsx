@@ -1,12 +1,14 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import myaxios from "../../utils/myaxios";
 
 const dtconfig = {
     "info": false,
     "lengthChange": false,
+    "lengthMenu": [10],
 }
 
 const SalePage = () => {
+    const [isLoading, setIsLoading] = useState(false);
     const [customers, setCustomers] = useState([]);
     const [products, setProducts] = useState([]);
     const [invoiceCustomer, setInvoiceCustomer] = useState({ name: "", email: "", id: "" });
@@ -18,40 +20,49 @@ const SalePage = () => {
         discount: 0,
     });
 
+    const productTableRef = useRef(null);
+    const customerTableRef = useRef(null);
+
     useEffect(() => {
-        const dt1 = $("#productTable").DataTable(dtconfig);
+        const dt1 = $(productTableRef.current).DataTable(dtconfig);
+        const dt2 = $(customerTableRef.current).DataTable(dtconfig);
 
         return () => {
             dt1.destroy();
-        };
-    }, [products]);
-
-    useEffect(() => {
-        const dt2 = $("#customerTable").DataTable(dtconfig);
-
-        return () => {
             dt2.destroy();
         };
-    }, [customers]);
+    }, [products, customers]);
 
     useEffect(() => {
-        myaxios.get("/list-customer")
-            .then((response) => {
-                setCustomers(response.data);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
+        const load_data = async () => {
+            setIsLoading(true);
+            try {
+                const customer_list = await myaxios.get("/list-customer");
+                console.log(customer_list);
+                setCustomers(customer_list.data);
 
-        myaxios.get("/list-product")
-            .then((response) => {
-                setProducts(response.data);
-            })
-            .catch((error) => {
+                const product_list = await myaxios.get("/list-product");
+                console.log(product_list);
+                setProducts(product_list.data);
+
+                setIsLoading(false);
+            } catch (error) {
                 console.log(error);
-            });
+            }
+        }
+
+        load_data();
     }, []);
 
+    if (isLoading) {
+        return (
+            <div id="loader" className="LoadingOverlay">
+                <div className="Line-Progress">
+                    <div className="indeterminate"></div>
+                </div>
+            </div>
+        );
+    }
 
     return (
         <>
@@ -143,7 +154,7 @@ const SalePage = () => {
                                         <input type="search" className="" placeholder="" aria-controls="productTable" />
                                     </label>
                                 </div> */}
-                                <table className="table w-100 no-footer dataTable" id="productTable" aria-describedby="productTable_info" style={{ width: "505px" }}>
+                                <table className="table w-100 no-footer dataTable" id="productTable" aria-describedby="productTable_info" style={{ width: "505px" }} ref={productTableRef}>
                                     <thead className="w-100">
                                         <tr className="text-xs text-bold">
                                             <td className="sorting sorting_desc" tabindex="0" aria-controls="productTable" rowspan="1" colspan="1" aria-label="Product: activate to sort column ascending" style={{ width: "256px" }} aria-sort="descending">Product</td>
@@ -194,7 +205,7 @@ const SalePage = () => {
 
                             {/* <div id="customerTable_wrapper" className="dataTables_wrapper no-footer"><div id="customerTable_filter" className="dataTables_filter"><label>Search:<input type="search" className="" placeholder="" aria-controls="customerTable" /></label></div> */}
 
-                            <table className="table table-sm w-100 no-footer dataTable" id="customerTable" aria-describedby="customerTable_info" style={{ width: "505px" }}>
+                            <table className="table table-sm w-100 no-footer dataTable" id="customerTable" aria-describedby="customerTable_info" style={{ width: "505px" }} ref={customerTableRef}>
                                 <thead className="w-100">
                                     <tr className="text-xs text-bold">
                                         <td className="sorting sorting_desc" tabindex="0" aria-controls="customerTable" rowspan="1" colspan="1" aria-label="Customer: activate to sort column ascending" style={{ width: "274px" }} aria-sort="descending">

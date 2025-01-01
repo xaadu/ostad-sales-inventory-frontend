@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from "react-router";
-import Navbar from "../partials/Navbar";
+import Navbar from "../partials/NavBar";
 import SideBar from "../partials/SideBar";
 import { useState } from "react";
 

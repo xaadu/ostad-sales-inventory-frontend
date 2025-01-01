@@ -10,7 +10,7 @@ import SetPasswordPage from "./pages/SetPasswordPage";
 import DashboardLayout from "./layouts/DashboardLayout";
 import DashboardIndexPage from "./pages/dashboard/IndexPage";
 import ProfilePage from "./pages/dashboard/ProfilePage";
-import CustomerPage from "./pages/Dashboard/CustomerPage";
+import CustomerPage from "./pages/dashboard/CustomerPage";
 import LogoutPage from "./pages/LogoutPage";
 import Test from "./components/Test";
 import SalePage from "./pages/dashboard/SalePage";
