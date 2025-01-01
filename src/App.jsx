@@ -13,6 +13,7 @@ import ProfilePage from "./pages/dashboard/ProfilePage";
 import CustomerPage from "./pages/Dashboard/CustomerPage";
 import LogoutPage from "./pages/LogoutPage";
 import Test from "./components/Test";
+import SalePage from "./pages/dashboard/SalePage";
 
 
 function App() {
@@ -32,6 +33,8 @@ function App() {
           <Route path="index/" element={<DashboardIndexPage />} />
           <Route path="profile/" element={<ProfilePage />} />
           <Route path="customer/" element={<CustomerPage />} />
+
+          <Route path="sale/" element={<SalePage />} />
           <Route path="test/" element={<Test />} />
 
         </Route>
